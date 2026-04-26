@@ -1,6 +1,97 @@
+import java.util.Scanner;
+
 public class Main {
+    public static void AdminBank(Scanner sc) {
+        boolean exit = false;
+        while (!exit) {
+            System.out.print("====ADMIN====");
+            System.out.println("1. View recent transactions");
+            System.out.println("2. Approve loan");
+            System.out.println("3. Unlock account");
+            System.out.println("4. Log out");
+            String choice = sc.nextLine();
 
+            switch (choice) {
+                case "1":
+                    //TODO Create a function to view recent transactions
+                break;
+                case "2":
+                    //TODO Loan approval functions
+                break;
+                case "3":
+                    //TODO Create Account Unlock Function
+                break;
+                case "4":
+                    exit = true;
+                break;
+                default:
+                    System.out.println("Invalid choice");
+                break;
+            }
+        }
+    }
+    public static void CustomerBank(Scanner sc) {
+        boolean exit = false;
+        while (!exit) {
+            System.out.println("====CUSTOMER====");
+            System.out.println("1. View recent transactions");
+            System.out.println("2. Log out");
+            String choice = sc.nextLine();
+            switch (choice) {
+                case "1":
+                    //TODO Transactions function
+                break;
+                case "2":
+                    exit = true;
+                break;
+                default:
+                    System.out.println("Invalid choice");
+                break;
+            }
+        }
+    }
+    public static void BankMenu(Scanner sc)
+    {
+        boolean exit = false;
+        while(!exit)
+        {
+            System.out.println("====BANK SYSTEM====");
+            System.out.println("1. Log in");
+            System.out.println("2. Sign up");
+            System.out.println("3. Exit");
+            String choice = sc.nextLine();
+
+            switch(choice)
+            {
+                case "1":
+                    String range = "";//TODO Logging function that returns the range or error
+                    switch (range)
+                    {
+                        case "Customer":
+                            CustomerBank(sc);
+                        break;
+                        case "Admin":
+                            AdminBank(sc);
+                        break;
+                        default:
+                            System.out.println("Invalid range");
+                        break;
+                    }
+                    break;
+                case "2":
+                    //TODO Register function
+                break;
+                case "3":
+                    exit = true;
+                break;
+                default:
+                    System.out.println("Invalid choice");
+                break;
+            }
+        }
+    }
     public static void main(String[] args){
-
+        Scanner sc = new Scanner(System.in);
+        BankMenu(sc);
     }
 }
