@@ -1,7 +1,16 @@
 import java.util.Scanner;
 
 public class Main {
-    public static void AdminBank(Scanner sc) {
+    public static void employeeLogin(Scanner sc){
+        boolean exit=false;
+        while(!exit){
+            System.out.println("====EMPLOYEE====");
+            System.out.println("1. ");
+            System.out.println("2. ");
+            System.out.println("3. Log out");
+        }
+    }
+    public static void adminLogin(Scanner sc) {
         boolean exit = false;
         while (!exit) {
             System.out.print("====ADMIN====");
@@ -19,7 +28,7 @@ public class Main {
                     //TODO Loan approval functions
                 break;
                 case "3":
-                    //TODO Create Account Unlock Function
+                    //TODO  Unlock Account Function
                 break;
                 case "4":
                     exit = true;
@@ -30,7 +39,7 @@ public class Main {
             }
         }
     }
-    public static void CustomerBank(Scanner sc) {
+    public static void customerLogin(Scanner sc) {
         boolean exit = false;
         while (!exit) {
             System.out.println("====CUSTOMER====");
@@ -50,7 +59,7 @@ public class Main {
             }
         }
     }
-    public static void BankMenu(Scanner sc)
+    public static void showBankMenu(Scanner sc)
     {
         boolean exit = false;
         while(!exit)
@@ -68,10 +77,13 @@ public class Main {
                     switch (range)
                     {
                         case "Customer":
-                            CustomerBank(sc);
+                            customerLogin(sc);
                         break;
+                        case "Employee":
+                            //TODO employeeLogin
+                            break;
                         case "Admin":
-                            AdminBank(sc);
+                            adminLogin(sc);
                         break;
                         default:
                             System.out.println("Invalid range");
@@ -92,6 +104,6 @@ public class Main {
     }
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        BankMenu(sc);
+        showBankMenu(sc);
     }
 }

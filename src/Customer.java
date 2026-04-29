@@ -3,11 +3,14 @@ import java.time.LocalDate;
 public class Customer extends User{
     int riskLevel;
     LocalDate linkingDate;
+    double balance;
 
-    public Customer(String name, String id, String address,int riskLevel,LocalDate linkingDate) {
+    public Customer(String name, String id, String address,int riskLevel,LocalDate linkingDate,
+                    double balance) {
         super(name, id, address);
         this.riskLevel=riskLevel;
         this.linkingDate=linkingDate;
+        this.balance=balance;
     }
 
     public int getRiskLevel() {
@@ -24,5 +27,15 @@ public class Customer extends User{
 
     public void setLinkingDate(LocalDate linkingDate) {
         this.linkingDate = linkingDate;
+    }
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+    public void depositMoney(double quantityMoney){
+
     }
 }

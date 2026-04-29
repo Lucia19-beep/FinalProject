@@ -31,8 +31,9 @@ public abstract class BankAccount {
     public void setAccountHolder(String accountHolder) {
         this.accountHolder = accountHolder;
     }
+    public void transferMoney(){
 
-
-
+    }
+    public abstract double withdrawMoney(double amount);
 
 }
