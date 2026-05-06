@@ -7,7 +7,7 @@ Depending on the role of the User you can do certain things.
 The customer can check balance,withdraw money,deposit money,transfer,view last movements and apply for a loan,which will need to be approved by the administrator.
 There are different types of a bank account like a current account or a saving one.
 
-The employee can consult a client and register a customer.
+The employee can consult a client,approve or refuse a loan.
 
-The administrator can approve or refuse a loan and cancel a client if he doesn't put the password correct in 3 attempts. 
+The administrator can cancel a client if he doesn't put the password correct in 3 attempts (lock/unlock account). 
 
