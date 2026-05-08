@@ -34,13 +34,12 @@ public class User {
         this.address = address;
     }
 
-     public String HashingPassword(String password) {
+    public String HashingPassword(String password) {
         StringBuilder newPassword = new StringBuilder();
         char[] passwordParts =  password.toCharArray();
 
         for(char c : passwordParts) {
-            Random rnd = new Random();
-            c += (char)(c+rnd.nextInt(1,20));
+            c += (char)(c+5);
             newPassword.append(c);
         }
 
