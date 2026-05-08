@@ -3,7 +3,7 @@ public class Employee extends User{
     double salary;
     boolean accessPermits;
 
-    public Employee(String name, String id, String address,String position,
+    public Employee(String name, int id, String address,String position,
                     double salary,boolean accessPermits) {
         super(name, id, address);
         this.position=position;

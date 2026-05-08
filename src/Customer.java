@@ -5,7 +5,7 @@ public class Customer extends User{
     LocalDate linkingDate;
     double balance;
 
-    public Customer(String name, String id, String address,int riskLevel,LocalDate linkingDate,
+    public Customer(String name, int id, String address,int riskLevel,LocalDate linkingDate,
                     double balance) {
         super(name, id, address);
         this.riskLevel=riskLevel;

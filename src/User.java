@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class User {
     String name;
     String id;
@@ -32,17 +30,5 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String HashingPassword(String password) {
-        StringBuilder newPassword = new StringBuilder();
-        char[] passwordParts =  password.toCharArray();
-
-        for(char c : passwordParts) {
-            c += (char)(c+5);
-            newPassword.append(c);
-        }
-
-        return newPassword.toString();
     }
 }
