@@ -13,12 +13,14 @@ public class Login {
         char[] passwordParts =  password.toCharArray();
 
         for(char c : passwordParts) {
-            c += (char)(c+rnd.nextInt(1,20)); // El random provocaria un error ya que nunca pordria ser la misma contraseña si se comparan con la introducida convertida
+            Random rnd = new Random();
+            c += (char)(c+rnd.nextInt(1,20));
             newPassword.append(c);
         }
 
         return newPassword.toString();
     }
+
     public static boolean checkPassword(String hashedPassword) {
         boolean correct = false;
         for (int i=0;i!=3 && !correct;i++)

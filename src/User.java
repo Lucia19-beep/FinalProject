@@ -1,9 +1,9 @@
 public class User {
     String name;
-    String id;
+    int id;
     String address;
 
-    public User(String name, String id, String address) {
+    public User(String name, int id, String address) {
         this.name = name;
         this.id = id;
         this.address = address;
@@ -16,11 +16,11 @@ public class User {
         this.name = name;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
