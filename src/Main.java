@@ -7,6 +7,19 @@ public class Main {
             System.out.println("====EMPLOYEE====");
             System.out.println("1. Approve a loan");
             System.out.println("2. Log out");
+            String choice=sc.nextLine();
+
+            switch(choice){
+                case "1":
+                    //TODO function that allows employee to approve a loan
+                    break;
+                case "2":
+                    exit=true;
+                    break;
+                default:
+                    System.out.println("Invalid choice");
+                    break;
+            }
         }
     }
     public static void adminLogin(Scanner sc) {
@@ -39,6 +52,7 @@ public class Main {
         }
     }
     public static void customerLogin(Scanner sc) {
+        BankManagement bankManagement=new BankManagement();
         boolean exit = false;
         while (!exit) {
             System.out.println("====CUSTOMER====");
@@ -64,6 +78,15 @@ public class Main {
                     //TODO function to deposit money
                     break;
                 case "5":
+                    System.out.println("Your IBAN: ");
+                    String originIban=sc.nextLine();
+                    System.out.println("Destination IBAN: ");
+                    String destinationIban=sc.nextLine();
+                    System.out.println("Amount of money: ");
+                    double amount=sc.nextDouble();
+                    System.out.println("Concept: ");
+                    String transferConcept=sc.nextLine();
+                    bankManagement.doTransfer(originIban,destinationIban,amount,transferConcept);
                     //TODO function to make a transfer
                     break;
                 case "6":

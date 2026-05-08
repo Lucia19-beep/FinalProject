@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class User {
     String name;
     String id;
