@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-    public static void employeeLogin(Scanner sc){
+    public static void employeeLogin(Scanner sc,User cs){
         boolean exit=false;
         while(!exit){
             System.out.println("====EMPLOYEE====");
@@ -22,7 +22,7 @@ public class Main {
             }
         }
     }
-    public static void adminLogin(Scanner sc) {
+    public static void adminLogin(Scanner sc,User cs) {
         boolean exit = false;
         while (!exit) {
             System.out.print("====ADMIN====");
@@ -51,7 +51,7 @@ public class Main {
             }
         }
     }
-    public static void customerLogin(Scanner sc) {
+    public static void customerLogin(Scanner sc, User cs) {
         BankManagement bankManagement=new BankManagement();
         boolean exit = false;
         while (!exit) {
@@ -112,28 +112,41 @@ public class Main {
             System.out.println("3. Exit");
             String choice = sc.nextLine();
 
+            User cs = null;
             switch(choice)
             {
                 case "1":
-                    String range = "";//TODO Logging function that returns the range or error
-                    switch (range)
+                    cs = Login.Login();
+                    if (cs != null)
                     {
-                        case "Customer":
-                            customerLogin(sc);
-                        break;
-                        case "Employee":
-                            //TODO employeeLogin
-                            break;
-                        case "Admin":
-                            adminLogin(sc);
-                        break;
-                        default:
-                            System.out.println("Invalid range");
-                        break;
+                        if(cs instanceof Administrator)
+                        {
+                            adminLogin(sc,cs);
+                        }
+                        else if(cs instanceof Customer)
+                        {
+                            customerLogin(sc,cs);
+                        }
+                        else if(cs instanceof Employee)
+                        {
+                            employeeLogin(sc,cs);
+                        }
+                    }
+                    else
+                    {
+                        System.out.println("Invalid User");
                     }
                     break;
                 case "2":
-                    //TODO Register function
+                    cs = Login.SignUpCustumer();
+                    if (cs != null)
+                    {
+                        customerLogin(sc,cs);
+                    }
+                    else
+                    {
+                        System.out.println("Invalid Username");
+                    }
                 break;
                 case "3":
                     exit = true;

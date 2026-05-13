@@ -35,4 +35,7 @@ public class TransactionList {
         }
     }
 
+    public List<Transaction> getTransactionsByAccountNumber(String accountNumber) {
+        return historyTransactions.getOrDefault(accountNumber, new ArrayList<>());
+    }
 }
