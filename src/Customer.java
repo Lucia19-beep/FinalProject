@@ -35,7 +35,6 @@ public class Customer extends User{
     public void setBalance(double balance) {
         this.balance = balance;
     }
-    public void depositMoney(double quantityMoney){
 
-    }
+
 }

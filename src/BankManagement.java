@@ -6,6 +6,7 @@ public class BankManagement {
     UserList usersList;
     BankAccountList accountsList;
     TransactionList transactionsList;
+    private int nextTransactionId = 1;
 
     public BankManagement(){
         usersList=new UserList();
@@ -75,8 +76,43 @@ public class BankManagement {
             } else {
                 System.out.println("You are not the owner of this account.");
             }
+        } else {
+            System.out.println("Account not found.");
         }
+    }
+    public void depositMoney(String accountNumber, double amount) {
+        BankAccount bankAccount = accountsList.searchByAccountNumber(accountNumber);
 
+        if (bankAccount != null) {
+            bankAccount.depositMoney(amount);
+
+            Transaction transaction = new Transaction(
+                    generateTransactionId(),
+                    LocalDate.now().atStartOfDay(),
+                    "Deposit",
+                  amount,
+                    accountNumber
+            );
+
+            transactionsList.addTransaction(accountNumber, transaction);
+
+        } else {
+            System.out.println("Account not found.");
+        }
+    }
+     public void withdrawMoney(String accountNumber,double amount){
+        BankAccount bankAccount=accountsList.searchByAccountNumber(accountNumber);
+
+        if(bankAccount!=null){
+            bankAccount.withdrawMoney(amount);
+            Transaction transaction=new Transaction(generateTransactionId(),LocalDate.now().atStartOfDay(),"Withdraw",amount,accountNumber);
+            transactionsList.addTransaction(accountNumber,transaction);
+        } else {
+            System.out.println("Account not found.");
+        }
+    }
+    private int generateTransactionId() {
+        return nextTransactionId++;
     }
 
 }

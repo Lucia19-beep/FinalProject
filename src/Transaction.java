@@ -2,20 +2,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Transaction {
-    String id;
+    int id;
     LocalDateTime date;
     String type;
     double amount;
     String accountDestination;
 
-    public Transaction(String id, LocalDateTime date, String type, double amount, String accountDestination) {
+    public Transaction(int id, LocalDateTime date, String type, double amount, String accountDestination) {
         this.id = id;
         this.date = date;
         this.type = type;
         this.amount = amount;
         this.accountDestination = accountDestination;
     }
-    public String getId() {
+    public int getId() {
         return id;
     }
 

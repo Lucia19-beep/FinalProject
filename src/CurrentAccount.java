@@ -15,7 +15,7 @@ public class CurrentAccount extends BankAccount {
         }
         return this.balance;
     }
-    public double depositMoney(double amount){
+    public void depositMoney(double amount){
         if(amount>0){
             System.out.println("Doing income...");
             this.balance+=amount;
@@ -23,7 +23,6 @@ public class CurrentAccount extends BankAccount {
         else{
             System.out.println("You can't deposit 0 or less money.");
         }
-        return this.balance;
     }
 
 }
