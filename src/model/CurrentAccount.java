@@ -1,3 +1,5 @@
+package model;
+
 public class CurrentAccount extends BankAccount {
     static final double MAINTENANCE_FEE=5.0;
 

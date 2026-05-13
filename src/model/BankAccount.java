@@ -1,3 +1,5 @@
+package model;
+
 public abstract class BankAccount {
     String accountNumber;
     double balance;

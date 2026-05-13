@@ -1,5 +1,11 @@
+package service;
+
+import model.BankAccount;
+import model.CurrentAccount;
+import model.Customer;
+import model.Transaction;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BankManagement {
@@ -38,7 +44,7 @@ public class BankManagement {
             , LocalDate linkingDate,double balance){
         Customer customer=new Customer(name,id,address,riskLevel,linkingDate,balance);
         usersList.users.put(id,customer);
-        System.out.println("Customer registered successfully");
+        System.out.println("model.Customer registered successfully");
     }
     public void doTransfer(String ibanOrigin,String ibanDestination,double amount
             ,String concept){

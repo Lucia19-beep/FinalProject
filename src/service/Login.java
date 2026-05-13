@@ -1,3 +1,10 @@
+package service;
+
+import model.Administrator;
+import model.Customer;
+import model.Employee;
+import model.User;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.util.Random;
@@ -86,7 +93,7 @@ public class Login {
         int riskLevel = 0;
         LocalDate linkingDate = LocalDate.now();
         double balance = 0.0;
-        String line = "Customer," +name+','+id+','+address+','+riskLevel+','+linkingDate+','+balance+','+password;
+        String line = "model.Customer," +name+','+id+','+address+','+riskLevel+','+linkingDate+','+balance+','+password;
         SignUser(line);
         cs = new Customer(name, id, address, riskLevel, linkingDate, balance);
         return cs;
@@ -130,7 +137,7 @@ public class Login {
         {
             accessPermit = true;
         }
-        String line = "Employee,"+name+','+id+','+address+','+position+','+salaryDouble+','+accessPermit+','+password;
+        String line = "model.Employee,"+name+','+id+','+address+','+position+','+salaryDouble+','+accessPermit+','+password;
         SignUser(line);
         employee = new Employee(name,id,address,position,salaryDouble,accessPermit);
         return employee;
@@ -160,13 +167,13 @@ public class Login {
             {
                 switch(user[0].trim())
                 {
-                    case "Customer":
+                    case "model.Customer":
                         cs = LoginCustomer(user,sc);
                     break;
                     case "Admin":
                         cs = LoginAdmin(user,sc);
                     break;
-                    case "Employee":
+                    case "model.Employee":
                         cs = LoginEmployee(user,sc);
                     break;
                 }
@@ -183,7 +190,7 @@ public class Login {
         return cs;
     }
 
-    public static User LoginAdmin(String[] user,Scanner sc)
+    public static User LoginAdmin(String[] user, Scanner sc)
     {
         User cs = null;
         boolean correct = checkPassword(user[5]);

@@ -1,7 +1,9 @@
+package app;
+
 import java.util.Scanner;
 
 public class Main {
-    public static void employeeLogin(Scanner sc,User cs){
+    public static void employeeLogin(Scanner sc, User cs){
         boolean exit=false;
         while(!exit){
             System.out.println("====EMPLOYEE====");
@@ -22,7 +24,7 @@ public class Main {
             }
         }
     }
-    public static void adminLogin(Scanner sc,User cs) {
+    public static void adminLogin(Scanner sc, User cs) {
         boolean exit = false;
         while (!exit) {
             System.out.print("====ADMIN====");
@@ -134,7 +136,7 @@ public class Main {
                     }
                     else
                     {
-                        System.out.println("Invalid User");
+                        System.out.println("Invalid model.User");
                     }
                     break;
                 case "2":
