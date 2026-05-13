@@ -33,7 +33,7 @@ public class BankManagement {
         this.transactionsList=transactionsList;
     }
 
-    public void createCustomer(String id, String name, String address, int riskLevel
+    public void createCustomer(int id, String name, String address, int riskLevel
             , LocalDate linkingDate,double balance){
         Customer customer=new Customer(name,id,address,riskLevel,linkingDate,balance);
         usersList.users.put(id,customer);
@@ -63,10 +63,18 @@ public class BankManagement {
         return isValid;
     }
     public void viewLastMovements(String id,String accountNumber){
-        if(isAccountOwner(id,accountNumber)){
-            BankAccount ba= accountsList.searchByAccountNumber(accountNumber);
+        BankAccount bankAccount=accountsList.searchByAccountNumber(accountNumber);
 
-            //System.out.println(ba.get);
+        if(bankAccount!=null){
+            if(isAccountOwner(id,accountNumber)){
+                List<Transaction> transactions=transactionsList.getTransactionsByAccountNumber(accountNumber);
+                System.out.println("Last movements for account "+accountNumber+":");
+                for(Transaction transaction:transactions){
+                    System.out.println(transaction);
+                }
+            } else {
+                System.out.println("You are not the owner of this account.");
+            }
         }
 
     }

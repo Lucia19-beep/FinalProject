@@ -31,7 +31,22 @@ public abstract class BankAccount {
     public void setAccountHolder(String accountHolder) {
         this.accountHolder = accountHolder;
     }
-    public void transferMoney(){
+
+    public void transferMoney(int money,String accountNumber) {
+        BankAccountList bankAccountList = new BankAccountList();
+
+        if (balance >= money) {
+            balance -= money;
+            if(bankAccountList.searchByAccountNumber(accountNumber)!=null){
+                BankAccount destinationAccount = bankAccountList.searchByAccountNumber(accountNumber);
+                destinationAccount.setBalance(destinationAccount.getBalance() + money);
+                System.out.println("Transfer successful.");
+            } else {
+                System.out.println("Destination account not found.");
+            }
+        } else {
+            System.out.println("Insufficient funds for transfer.");
+        }
 
     }
     public abstract double withdrawMoney(double amount);
