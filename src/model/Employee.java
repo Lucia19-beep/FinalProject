@@ -1,3 +1,5 @@
+package model;
+
 public class Employee extends User{
     String position;
     double salary;
