@@ -1,4 +1,6 @@
+import model.User;
 import org.junit.Test;
+import service.UserList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
