@@ -1,5 +1,9 @@
 package model;
 
+import service.BankAccountList;
+
+import java.util.Objects;
+
 public abstract class BankAccount {
     String accountNumber;
     double balance;
@@ -61,5 +65,12 @@ public abstract class BankAccount {
         else{
             System.out.println("You can't deposit 0 or less money.");
         }
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BankAccount ba = (BankAccount) o;
+        return Objects.equals(this.accountNumber, ba.accountNumber);
     }
 }

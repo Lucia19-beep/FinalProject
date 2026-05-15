@@ -30,5 +30,11 @@ public class BankAccountList {
         }
         return null;
     }
+    public void addBankAccount(BankAccount ba){
+        accounts.add(ba);
+    }
+    public boolean deleteBankAccount(BankAccount ba){
+        return accounts.remove(ba);
+    }
 
 }
