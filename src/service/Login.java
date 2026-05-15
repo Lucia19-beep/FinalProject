@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 public class Login {
     static Scanner sc = new Scanner(System.in);
-    static Random rnd = new Random();
 
 
     public static String HashingPassword(String password) {
@@ -20,7 +19,6 @@ public class Login {
         char[] passwordParts = password.toCharArray();
 
         for (char c : passwordParts) {
-            Random rnd = new Random();
             c = (char) (c + 5);
             newPassword.append(c);
         }
@@ -32,7 +30,7 @@ public class Login {
         for (int i=0;i!=3 && !correct;i++)
         {
             System.out.print("Enter Your Password: ");
-            String hashedPassword2 = HashingPassword(sc.next());
+            String hashedPassword2 = HashingPassword(sc.nextLine());
             correct = hashedPassword2.equals(hashedPassword);
         }
         return correct;
