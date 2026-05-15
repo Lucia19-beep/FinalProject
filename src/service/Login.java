@@ -65,7 +65,7 @@ public class Login {
             throw new RuntimeException(e);
         } ;
     }
-    public static String[] SignData()
+    public static String[] SignUserData()
     {
         String[] data = new String[3];
         System.out.print("Enter Your Name: ");
@@ -81,7 +81,7 @@ public class Login {
     {
         Customer cs = null;
 
-        String[] data = SignData();
+        String[] data = SignUserData();
         String name = data[0];
         String address = data[1];
         String password = data[2];
@@ -95,24 +95,32 @@ public class Login {
         cs = new Customer(name, id, address, riskLevel, linkingDate, balance);
         return cs;
     }
+    public static String[] SignAdminData()
+    {
+        String[] data = SignUserData();
+        System.out.print("Acces Level: ");
+        int accessLevel = 0;
+        String[] dataAdmin = {data[0],data[1],data[2],Integer.toString(accessLevel)};
+        return dataAdmin;
+    }
     public static User SignUpAdmin()
     {
         Administrator admin = null;
-        String[] data = SignData();
+        String[] data = SignAdminData();
         String name = data[0];
         String address = data[1];
         String password = data[2];
         int id = GetNumberID();
-        System.out.print("Acces Level: ");
-        int accessLevel = 0;
-        if(Integer.parseInt(sc.nextLine())<0)
-        {
-            accessLevel = Integer.parseInt(sc.nextLine());;
-        }
+        String accessLevelString = data[3];
+        int accessLevel = Integer.parseInt(accessLevelString);
         String line = "Admin,"+name+','+id+','+address+','+accessLevel+','+password;
         SignUser(line);
         admin = new Administrator(name, id, address, accessLevel);
         return admin;
+    }
+    public static String[] SignEmployeeData()
+    {
+        String[] data = new String[3];
     }
     public static User SignUpEmployee()
     {
@@ -139,14 +147,18 @@ public class Login {
         employee = new Employee(name,id,address,position,salaryDouble,accessPermit);
         return employee;
     }
-
+    public static String LoginDates()
+    {
+        System.out.print("Enter Your Name: ");
+        String name = sc.nextLine();
+        return name;
+    }
     public static User Login()
     {
         User cs = null;
         try(BufferedReader bf = new BufferedReader(new FileReader("users.txt")))
         {
-            System.out.print("Enter Your Name: ");
-            String name = sc.nextLine();
+            String name = LoginDates();
             boolean found = false;
             String[] user = null;
 
