@@ -38,5 +38,7 @@ public class Customer extends User{
         this.balance = balance;
     }
 
-
+    public String checkBalance() {
+        return "Your balance is " + getBalance() + "€";
+    }
 }

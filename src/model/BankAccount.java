@@ -6,6 +6,7 @@ public abstract class BankAccount {
     String accountNumber;
     double balance;
     String accountHolder;
+    boolean locked;
 
     public BankAccount(String accountNumber, double balance, String accountHolder) {
         this.accountNumber = accountNumber;
@@ -35,7 +36,13 @@ public abstract class BankAccount {
     public void setAccountHolder(String accountHolder) {
         this.accountHolder = accountHolder;
     }
+    public boolean isLocked() {
+        return locked;
+    }
 
+    public void setLocked(boolean locked) {
+        this.locked = locked;
+    }
     public void transferMoney(int money,String accountNumber) {
         BankAccountList bankAccountList = new BankAccountList();
 

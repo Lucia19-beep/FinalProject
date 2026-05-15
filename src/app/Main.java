@@ -1,9 +1,6 @@
 package app;
 
-import model.Administrator;
-import model.Customer;
-import model.Employee;
-import model.User;
+import model.*;
 import service.BankManagement;
 import service.Login;
 
@@ -31,36 +28,111 @@ public class Main {
             }
         }
     }
-    public static void adminLogin(Scanner sc, User cs) {
+    public static void adminLogin(Scanner sc, Administrator cs) {
+
+        BankManagement bankManagement = new BankManagement();
+
         boolean exit = false;
+
         while (!exit) {
-            System.out.print("====ADMIN====");
+
+            System.out.println("====ADMIN====");
             System.out.println("1. View recent transactions");
             System.out.println("2. Lock account");
             System.out.println("3. Unlock account");
             System.out.println("4. Log out");
+
             String choice = sc.nextLine();
 
             switch (choice) {
+
                 case "1":
-                    //TODO Create a function to view recent transactions
-                break;
-                case "2":
-                    //TODO Create a function to lock an account
+
+                    cs.showTransactions();
+
                     break;
+
+                case "2":
+
+                    System.out.println("Enter account number to lock:");
+
+                    String lockAccountNumber = sc.nextLine();
+
+                    BankAccount lockAccount =
+                            bankManagement.getAccountsList()
+                                    .searchByAccountNumber(lockAccountNumber);
+
+                    if (lockAccount != null) {
+
+                        if (lockAccount instanceof CurrentAccount current) {
+
+                            current.setLocked(true);
+
+                            System.out.println("Account locked successfully.");
+                        }
+
+                        else if (lockAccount instanceof SavingAccount saving) {
+
+                            saving.setLocked(true);
+
+                            System.out.println("Account locked successfully.");
+                        }
+
+                    } else {
+
+                        System.out.println("Account not found.");
+                    }
+
+                    break;
+
                 case "3":
-                    //TODO  Unlock Account Function
-                break;
+
+                    System.out.println("Enter account number to unlock:");
+
+                    String unlockAccountNumber = sc.nextLine();
+
+                    BankAccount unlockAccount =
+                            bankManagement.getAccountsList()
+                                    .searchByAccountNumber(unlockAccountNumber);
+
+                    if (unlockAccount != null) {
+
+                        if (unlockAccount instanceof CurrentAccount current) {
+
+                            current.setLocked(false);
+
+                            System.out.println("Account unlocked successfully.");
+                        }
+
+                        else if (unlockAccount instanceof SavingAccount saving) {
+
+                            saving.setLocked(false);
+
+                            System.out.println("Account unlocked successfully.");
+                        }
+
+                    } else {
+
+                        System.out.println("Account not found.");
+                    }
+
+                    break;
+
                 case "4":
+
                     exit = true;
-                break;
+
+                    break;
+
                 default:
+
                     System.out.println("Invalid choice");
-                break;
+
+                    break;
             }
         }
     }
-    public static void customerLogin(Scanner sc, User cs) {
+    public static void customerLogin(Scanner sc, Customer cs) {
         BankManagement bankManagement=new BankManagement();
         boolean exit = false;
         while (!exit) {
@@ -78,7 +150,7 @@ public class Main {
                     //TODO Transactions function
                 break;
                 case "2":
-                    //TODO function to check balanc
+                    System.out.println(cs.checkBalance());
                     break;
                 case "3":
                     //TODO function that allows to withdraw money
@@ -130,15 +202,15 @@ public class Main {
                     {
                         if(cs instanceof Administrator)
                         {
-                            adminLogin(sc,cs);
+                            adminLogin(sc, (Administrator) cs);
                         }
                         else if(cs instanceof Customer)
                         {
-                            customerLogin(sc,cs);
+                            customerLogin(sc,(Customer) cs);
                         }
                         else if(cs instanceof Employee)
                         {
-                            employeeLogin(sc,cs);
+                            employeeLogin(sc, (Employee) cs);
                         }
                     }
                     else
@@ -150,7 +222,7 @@ public class Main {
                     cs = Login.SignUpCustumer();
                     if (cs != null)
                     {
-                        customerLogin(sc,cs);
+                        customerLogin(sc,(Customer) cs);
                     }
                     else
                     {
