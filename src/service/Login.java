@@ -17,14 +17,13 @@ public class Login {
 
     public static String HashingPassword(String password) {
         StringBuilder newPassword = new StringBuilder();
-        char[] passwordParts =  password.toCharArray();
+        char[] passwordParts = password.toCharArray();
 
-        for(char c : passwordParts) {
+        for (char c : passwordParts) {
             Random rnd = new Random();
-            c += (char)(c+rnd.nextInt(1,20));
+            c = (char) (c + 5);
             newPassword.append(c);
         }
-
         return newPassword.toString();
     }
 
