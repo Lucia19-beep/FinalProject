@@ -132,7 +132,7 @@ public class Main {
             }
         }
     }
-    public static void customerLogin(Scanner sc, User cs) {
+    public static void customerLogin(Scanner sc, Customer cs) {
         BankManagement bankManagement=new BankManagement();
         boolean exit = false;
         while (!exit) {
@@ -150,7 +150,7 @@ public class Main {
                     //TODO Transactions function
                 break;
                 case "2":
-                    //TODO function to check balanc
+                    System.out.println(cs.checkBalance());
                     break;
                 case "3":
                     //TODO function that allows to withdraw money
@@ -206,11 +206,11 @@ public class Main {
                         }
                         else if(cs instanceof Customer)
                         {
-                            customerLogin(sc,cs);
+                            customerLogin(sc,(Customer) cs);
                         }
                         else if(cs instanceof Employee)
                         {
-                            employeeLogin(sc,cs);
+                            employeeLogin(sc, (Employee) cs);
                         }
                     }
                     else
@@ -222,7 +222,7 @@ public class Main {
                     cs = Login.SignUpCustumer();
                     if (cs != null)
                     {
-                        customerLogin(sc,cs);
+                        customerLogin(sc,(Customer) cs);
                     }
                     else
                     {
