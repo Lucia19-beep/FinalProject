@@ -75,7 +75,7 @@ public class Main {
             String choice = sc.nextLine();
             switch (choice) {
                 case "1":
-                    //TODO Transactions function
+                    //TODO Transactions functionaa
                 break;
                 case "2":
                     //TODO function to check balanc
