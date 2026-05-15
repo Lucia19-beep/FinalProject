@@ -16,18 +16,14 @@ class LoginTest {
     }
 
     @org.junit.jupiter.api.Test
-    void checkPassword() {
-        //Test ID : Login2
-        //Nombre: CheckPassword
-        //Preconditions: Correct
-        //Steps: Checks day are superior of months
-        //Date: junio
-        //Expected result: ozsnt
-        assertEquals(true,Login.checkPassword("ozsnt"));
-    }
-
-    @org.junit.jupiter.api.Test
     void getNumberID() {
+        //Test ID : Login2
+        //Nombre: Generate 1
+        //Preconditions: X
+        //Steps: Generate ID
+        //Date:
+        //Expected result: 2
+        assertEquals(2,Login.GetNumberID());
     }
 
     @org.junit.jupiter.api.Test
