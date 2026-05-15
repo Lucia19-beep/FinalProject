@@ -1,1 +1,0 @@
-model.Customer,Samu,1,asd@gmai,0,2026-05-15,0.0,mwku
