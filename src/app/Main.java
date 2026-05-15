@@ -1,5 +1,12 @@
 package app;
 
+import model.Administrator;
+import model.Customer;
+import model.Employee;
+import model.User;
+import service.BankManagement;
+import service.Login;
+
 import java.util.Scanner;
 
 public class Main {
