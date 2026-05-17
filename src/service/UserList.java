@@ -24,4 +24,14 @@ public class UserList {
     public void deleteUser(int id,User user){
         users.remove(id,user);
     }
+    public User searchByName(String name) {
+        User user1 = null;
+        for (User user2 : users.values()) {
+            if (user2.getName().equalsIgnoreCase(name)) {
+              user1 = user2;
+            }
+        }
+
+        return user1;
+    }
 }

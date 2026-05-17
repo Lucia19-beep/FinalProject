@@ -8,9 +8,9 @@ import java.util.Map;
 public class Administrator extends User{
     int accessLevel;
 
-    public Administrator(String name, int id, String address,int accessLevel) {
-        super(name, id, address);
-        this.accessLevel=accessLevel;
+    public Administrator(String name, int id, String address, String password, int accessLevel) {
+        super(name, id, address, password);
+        this.accessLevel = accessLevel;
     }
     public int getAccessLevel() {
         return accessLevel;

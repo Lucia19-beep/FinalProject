@@ -1,7 +1,7 @@
 package model;
 
 public class CurrentAccount extends BankAccount {
-    static final double MAINTENANCE_FEE=5.0;
+    static double MAINTENANCE_FEE=5.0;
 
     public CurrentAccount(String accountNumber, double balance, String accountHolder) {
         super(accountNumber, balance, accountHolder);
