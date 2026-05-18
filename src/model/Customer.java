@@ -62,4 +62,8 @@ public class Customer extends User{
     public String checkBalance() {
         return "Your balance is " + getBalance() + "€";
     }
+    @Override
+    public String toString() {
+        return super.toString()+','+getRiskLevel()+','+getLinkingDate()+','+getBalance()+','+getAccountNumber();
+    }
 }

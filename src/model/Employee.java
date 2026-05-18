@@ -35,4 +35,8 @@ public class Employee extends User{
     public void setAccessPermits(boolean accessPermits) {
         this.accessPermits = accessPermits;
     }
+    @Override
+    public String toString() {
+        return super.toString()+','+getPosition()+','+getSalary()+','+isAccessPermits();
+    }
 }
