@@ -5,12 +5,12 @@ public class Employee extends User{
     double salary;
     boolean accessPermits;
 
-    public Employee(String name, int id, String address,String position,
-                    double salary,boolean accessPermits) {
-        super(name, id, address);
-        this.position=position;
-        this.salary=salary;
-        this.accessPermits=accessPermits;
+    public Employee(String name, int id, String address, String password,
+                    String position, double salary, boolean accessPermits) {
+        super(name, id, address, password);
+        this.position = position;
+        this.salary = salary;
+        this.accessPermits = accessPermits;
     }
     public String getPosition() {
         return position;

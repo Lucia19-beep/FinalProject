@@ -8,11 +8,14 @@ public abstract class BankAccount {
     String accountNumber;
     double balance;
     String accountHolder;
+    private boolean locked;
+
 
     public BankAccount(String accountNumber, double balance, String accountHolder) {
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.accountHolder = accountHolder;
+        this.locked = false;
     }
     public String getAccountNumber() {
         return accountNumber;
@@ -33,7 +36,12 @@ public abstract class BankAccount {
     public String getAccountHolder() {
         return accountHolder;
     }
-
+    public boolean isLocked() {
+        return locked;
+    }
+    public void setLocked(boolean locked) {
+        this.locked = locked;
+    }
     public void setAccountHolder(String accountHolder) {
         this.accountHolder = accountHolder;
     }
