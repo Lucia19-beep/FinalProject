@@ -90,4 +90,14 @@ public class UserList {
             throw new RuntimeException(e);
         }
     }
+    public String HashingPassword(String password) {
+        StringBuilder newPassword = new StringBuilder();
+        char[] passwordParts = password.toCharArray();
+
+        for (char c : passwordParts) {
+            c = (char) (c + 5);
+            newPassword.append(c);
+        }
+        return newPassword.toString();
+    }
 }

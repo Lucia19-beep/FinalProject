@@ -6,6 +6,7 @@ import model.Employee;
 import model.User;
 import service.BankManagement;
 import service.Login;
+import service.UserList;
 
 import java.util.Scanner;
 
@@ -92,7 +93,7 @@ public class Main {
                     System.out.println("Destination IBAN: ");
                     String destinationIban=sc.nextLine();
                     System.out.println("Amount of money: ");
-                    double amount=sc.nextDouble();
+                    double amount = Double.parseDouble(sc.nextLine());
                     System.out.println("Concept: ");
                     String transferConcept=sc.nextLine();
                     bankManagement.doTransfer(originIban,destinationIban,amount,transferConcept);
@@ -110,7 +111,7 @@ public class Main {
             }
         }
     }
-    public static void showBankMenu(Scanner sc)
+    public static void showBankMenu(Scanner sc,UserList userList)
     {
         boolean exit = false;
         while(!exit)
@@ -121,11 +122,11 @@ public class Main {
             System.out.println("3. Exit");
             String choice = sc.nextLine();
 
-            User cs = null;
+            Login login=new Login();
             switch(choice)
             {
                 case "1":
-                    cs = Login.Login();
+                    User cs = login.Login(userList,sc);
                     if (cs != null)
                     {
                         if(cs instanceof Administrator)
@@ -147,15 +148,8 @@ public class Main {
                     }
                     break;
                 case "2":
-                    cs = Login.SignUpCustumer();
-                    if (cs != null)
-                    {
-                        customerLogin(sc,cs);
-                    }
-                    else
-                    {
-                        System.out.println("Invalid Username");
-                    }
+                    login.RegistrerCustomer(userList,sc);
+                    System.out.println("Registration Successful");
                 break;
                 case "3":
                     exit = true;
@@ -168,6 +162,8 @@ public class Main {
     }
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        showBankMenu(sc);
+        UserList userList = new UserList();//Preguntar sistema userList
+        userList.loadMapUser();
+        showBankMenu(sc,userList);
     }
 }

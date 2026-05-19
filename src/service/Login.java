@@ -11,222 +11,98 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Login {
-    static Scanner sc = new Scanner(System.in);
-
-
-    public static String HashingPassword(String password) {
-        StringBuilder newPassword = new StringBuilder();
-        char[] passwordParts = password.toCharArray();
-
-        for (char c : passwordParts) {
-            c = (char) (c + 5);
-            newPassword.append(c);
-        }
-        return newPassword.toString();
-    }
-
-    public static boolean checkPassword(String hashedPassword) {
-        boolean correct = false;
-        for (int i=0;i!=3 && !correct;i++)
-        {
-            System.out.print("Enter Your Password: ");
-            String hashedPassword2 = HashingPassword(sc.nextLine());
-            correct = hashedPassword2.equals(hashedPassword);
-        }
-        return correct;
-    }
-    public static int GetNumberID()
-    {
-        int counterID = 0;
-        File file = new File("users.txt");
-        if (file.exists())
-        {
-            try(BufferedReader br = new BufferedReader(new FileReader("users.txt"))) {
-                String line;
-                while((line = br.readLine()) != null)
-                {
-                    counterID++;
-                }
-            }
-            catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return counterID+1;
-    }
-
-    public static void SignUser(String line)
-    {
-        try(PrintWriter out = new PrintWriter(new FileWriter("users.txt",true))) {
-            out.println(line);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } ;
-    }
-    public static String[] SignUserData()
-    {
-        String[] data = new String[3];
+    public User Login(UserList usertList, Scanner sc){
         System.out.print("Enter Your Name: ");
-        data[0] = sc.nextLine();
-        System.out.print("Enter Your Address: ");
-        data[1] = sc.nextLine();
-        System.out.print("Enter Password: ");
-        data[2] = HashingPassword(sc.nextLine());
+        String name = sc.nextLine();
 
-        return data;
-    }
-    public static User SignUpCustumer()
-    {
-        Customer cs = null;
+        System.out.print("Enter Your Password: ");
+        String password = sc.nextLine();
 
-        String[] data = SignUserData();
-        String name = data[0];
-        String address = data[1];
-        String password = data[2];
-
-        int id = GetNumberID();
-        int riskLevel = 0;
-        LocalDate linkingDate = LocalDate.now();
-        double balance = 0.0;
-        String line = "model.Customer," +name+','+id+','+address+','+riskLevel+','+linkingDate+','+balance+','+password;
-        SignUser(line);
-        cs = new Customer(name, id, address, riskLevel, linkingDate, balance);
-        return cs;
-    }
-    public static String[] SignAdminData()
-    {
-        String[] data = SignUserData();
-        System.out.print("Acces Level: ");
-        int accessLevel = 0;
-        String[] dataAdmin = {data[0],data[1],data[2],Integer.toString(accessLevel)};
-        return dataAdmin;
-    }
-    public static User SignUpAdmin()
-    {
-        Administrator admin = null;
-        String[] data = SignAdminData();
-        String name = data[0];
-        String address = data[1];
-        String password = data[2];
-        int id = GetNumberID();
-        String accessLevelString = data[3];
-        int accessLevel = Integer.parseInt(accessLevelString);
-        String line = "Admin,"+name+','+id+','+address+','+accessLevel+','+password;
-        SignUser(line);
-        admin = new Administrator(name, id, address, accessLevel);
-        return admin;
-    }
-    public static String[] SignEmployeeData()
-    {
-        String[] data = new String[3];
-    }
-    public static User SignUpEmployee()
-    {
-        Employee employee = null;
-        String[] data = SignData();
-        String name = data[0];
-        String address = data[1];
-        String password = data[2];
-        int id = GetNumberID();
-        System.out.print("Position: ");
-        String position = sc.nextLine();
-        System.out.print("Salary: ");
-        String salary = sc.nextLine();
-        Double salaryDouble = Double.parseDouble(salary);
-        System.out.print("Permits: Yes/No ");
-        String permission = sc.nextLine();
-        boolean accessPermit = false;
-        if (permission.equalsIgnoreCase("Yes"))
+        User user = usertList.searchByName(name);
+        if (user != null)
         {
-            accessPermit = true;
+            String hashedPassword = usertList.HashingPassword(password);
+            if(!user.getPassword().equals(hashedPassword)){
+                System.out.println("Wrong Password");
+                user = null;
+            }
         }
-        String line = "model.Employee,"+name+','+id+','+address+','+position+','+salaryDouble+','+accessPermit+','+password;
-        SignUser(line);
-        employee = new Employee(name,id,address,position,salaryDouble,accessPermit);
-        return employee;
+        else {
+            System.out.println("Invalid Username");
+        }
+        return user;
     }
-    public static String LoginDates()
+
+    public void RegistrerCustomer(UserList usertList, Scanner sc)
     {
         System.out.print("Enter Your Name: ");
         String name = sc.nextLine();
-        return name;
-    }
-    public static User Login()
-    {
-        User cs = null;
-        try(BufferedReader bf = new BufferedReader(new FileReader("users.txt")))
-        {
-            String name = LoginDates();
-            boolean found = false;
-            String[] user = null;
 
-            String line;
-            while((line = bf.readLine()) != null && !found)
-            {
-                String[] data = line.split(",");
-                if(data[1].equalsIgnoreCase(name.trim()))
-                {
-                    found = true;
-                    user = data;
-                }
-            }
-            if (found)
-            {
-                switch(user[0].trim())
-                {
-                    case "model.Customer":
-                        cs = LoginCustomer(user,sc);
-                    break;
-                    case "Admin":
-                        cs = LoginAdmin(user,sc);
-                    break;
-                    case "model.Employee":
-                        cs = LoginEmployee(user,sc);
-                    break;
-                }
-            }
-            else
-            {
-                System.out.println("Invalid Username");
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return cs;
+        System.out.print("Enter Your Address: ");
+        String address = sc.nextLine();
+
+        System.out.print("Enter Your Password: ");
+        String password = sc.nextLine();
+
+        String hashed = usertList.HashingPassword(password);
+        int id = usertList.getUsers().size()+1; // Check in case of error, get the number of users and add 1
+
+        Customer customer = new Customer(name,id,address,hashed,0,LocalDate.now(),0.0,"AC"+id); //REVISAR
+        usertList.addUser(id,customer);
+        usertList.saveMapUser(id,customer);
+        System.out.println("Customer Registered");
     }
 
-    public static User LoginAdmin(String[] user, Scanner sc)
-    {
-        User cs = null;
-        boolean correct = checkPassword(user[5]);
-        if (correct)
-        {
-            cs = new Administrator(user[1],Integer.parseInt(user[2]),user[3],Integer.parseInt(user[4]));
-        }
-        return cs;
+    public void RegistrerEmployee(UserList usertList, Scanner sc){
+        System.out.print("Enter Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter Address: ");
+        String address = sc.nextLine();
+
+        System.out.print("Enter Password: ");
+        String password = sc.nextLine();
+
+        String hashed = usertList.HashingPassword(password);
+
+        int id = usertList.getUsers().size()+1;
+
+        System.out.print("Enter the position: ");
+        String position = sc.nextLine();
+
+        System.out.print("Enter Salary: ");
+        double salary = Double.parseDouble(sc.nextLine());
+
+        System.out.print("Access Permit (true/false): ");
+        boolean accessPermit = Boolean.parseBoolean(sc.nextLine());
+
+        Employee employee = new Employee(name,id,address,hashed,position,salary,accessPermit);
+
+        usertList.addUser(id,employee);
+        usertList.saveMapUser(id,employee);
+        System.out.println("Employee Registered");
     }
-    public static User LoginCustomer(String[] user,Scanner sc)
+
+    public void RegistrerAdmin(UserList usertList, Scanner sc)
     {
-        User cs = null;
-        boolean correct = checkPassword(user[7]);
-        if (correct)
-        {
-            cs = new Customer(user[1],Integer.parseInt(user[2]),user[3],Integer.parseInt(user[4]),LocalDate.parse(user[5]),Double.parseDouble(user[6]));
-        }
-        return cs;
-    }
-    public static User LoginEmployee(String[] user,Scanner sc)
-    {
-        User cs = null;
-        boolean correct = checkPassword(user[7]);
-        if (correct)
-        {
-            cs = new Employee(user[1],Integer.parseInt(user[2]),user[3],user[4],Double.parseDouble(user[5]),Boolean.parseBoolean(user[6]));
-        }
-        return cs;
+        System.out.print("Enter Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter Address: ");
+        String address = sc.nextLine();
+
+        System.out.print("Enter Password: ");
+        String password = sc.nextLine();
+        String hashed = usertList.HashingPassword(password);
+
+        int id = usertList.getUsers().size()+1;
+
+        System.out.print("Enter acces level");
+        int accessLevel = Integer.parseInt(sc.nextLine());
+
+        Administrator administrator = new Administrator(name,id,address,hashed,accessLevel);
+        usertList.addUser(id,administrator);
+        usertList.saveMapUser(id,administrator);
+        System.out.println("Admin Registered");
     }
 }
