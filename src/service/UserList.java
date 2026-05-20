@@ -10,9 +10,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class UserList {
     Map<Integer, User> users;
+    Scanner sc=new Scanner(System.in);
 
     public UserList(){
         users=new HashMap<>();
@@ -39,6 +41,32 @@ public class UserList {
         }
 
         return user1;
+    }
+    public void saveMap(UserList userList){
+        try(PrintWriter out = new PrintWriter(System.out,true)){
+            for(User user: userList.getUsers().values()){
+                if(user instanceof Customer){
+                    Customer customer=(Customer)user;
+                    out.println("Customer,"+customer.getId()+","+customer.getName()+","+customer.getAddress()+","+customer.getPassword()+","+customer.getLinkingDate()+","+customer.getRiskLevel()+","+customer.getBalance()+","+customer.getAccountNumber()+","+customer.getBankAccount());
+                }
+                else if (user instanceof Employee)
+                {
+                    Employee employee=(Employee)user;
+                    out.println("Employee,"+employee.getId()+","+employee.getName()+","+employee.getAddress()+","+employee.getPassword()+","+employee.getPosition()+","+employee.getSalary()+","+employee.isAccessPermits());
+                }
+                else if (user instanceof Administrator)
+                {
+                    Administrator admin=(Administrator)user;
+                    out.println("Administrator,"+admin.getId()+","+admin.getName()+","+admin.getAddress()+","+admin.getPassword()+","+admin.getAccessLevel());
+                }
+                else {
+                    out.println("Unknown User "+user.getId());
+                }
+            }
+        }
+        catch (Exception e){
+            throw  new RuntimeException(e);
+        }
     }
     public void saveMapUser(int id,User user){
         try(PrintWriter pw = new PrintWriter(new FileWriter("users.txt",true))){
@@ -90,7 +118,7 @@ public class UserList {
             throw new RuntimeException(e);
         }
     }
-    public String HashingPassword(String password) {
+    public String hashingPassword(String password) {
         StringBuilder newPassword = new StringBuilder();
         char[] passwordParts = password.toCharArray();
 
@@ -99,5 +127,44 @@ public class UserList {
             newPassword.append(c);
         }
         return newPassword.toString();
+    }
+
+    public void deleteUser(UserList userList){
+        System.out.println("Enter User Name: ");
+        String name=sc.nextLine();
+        User user=searchByName(name);
+        users.remove(user.getId());
+        saveMap(userList);
+    }
+
+    public void editUser(UserList userList){
+        System.out.println("Enter User Name: ");
+        String name=sc.nextLine();
+        User user=searchByName(name);
+        boolean exit = false;
+        while(!exit){
+            if(user instanceof Customer){
+                Customer customer=(Customer)user;
+                System.out.println("Enter New Customer Name: ");
+                customer.setName(sc.nextLine());
+                System.out.println("Enter New Customer Address: ");
+                customer.setAddress(sc.nextLine());
+                System.out.println("Enter New Customer Password: ");
+                customer.setPassword(hashingPassword(sc.nextLine()));
+                System.out.println("Enter New Customer Bank Account: ");
+
+            }
+            else if (user instanceof Employee){
+
+            }
+            else if (user instanceof Administrator){
+
+            }
+            else{
+                System.out.println("Invalid User Name");
+                exit = true;
+            }
+
+        }
     }
 }

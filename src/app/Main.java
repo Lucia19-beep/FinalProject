@@ -126,7 +126,7 @@ public class Main {
             switch(choice)
             {
                 case "1":
-                    User cs = login.Login(userList,sc);
+                    User cs = login.login(userList,sc);
                     if (cs != null)
                     {
                         if(cs instanceof Administrator)
@@ -148,7 +148,7 @@ public class Main {
                     }
                     break;
                 case "2":
-                    login.RegistrerCustomer(userList,sc);
+                    login.registrerCustomer(userList,sc);
                     System.out.println("Registration Successful");
                 break;
                 case "3":
