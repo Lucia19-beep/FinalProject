@@ -11,7 +11,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Login {
-    public User Login(UserList usertList, Scanner sc){
+    public User login(UserList usertList, Scanner sc){
         System.out.print("Enter Your Name: ");
         String name = sc.nextLine();
 
@@ -21,7 +21,7 @@ public class Login {
         User user = usertList.searchByName(name);
         if (user != null)
         {
-            String hashedPassword = usertList.HashingPassword(password);
+            String hashedPassword = usertList.hashingPassword(password);
             if(!user.getPassword().equals(hashedPassword)){
                 System.out.println("Wrong Password");
                 user = null;
@@ -33,7 +33,7 @@ public class Login {
         return user;
     }
 
-    public void RegistrerCustomer(UserList usertList, Scanner sc)
+    public void registrerCustomer(UserList usertList, Scanner sc)
     {
         System.out.print("Enter Your Name: ");
         String name = sc.nextLine();
@@ -44,7 +44,7 @@ public class Login {
         System.out.print("Enter Your Password: ");
         String password = sc.nextLine();
 
-        String hashed = usertList.HashingPassword(password);
+        String hashed = usertList.hashingPassword(password);
         int id = usertList.getUsers().size()+1; // Check in case of error, get the number of users and add 1
 
         Customer customer = new Customer(name,id,address,hashed,0,LocalDate.now(),0.0,"AC"+id); //REVISAR
@@ -53,7 +53,7 @@ public class Login {
         System.out.println("Customer Registered");
     }
 
-    public void RegistrerEmployee(UserList usertList, Scanner sc){
+    public void registrerEmployee(UserList usertList, Scanner sc){
         System.out.print("Enter Name: ");
         String name = sc.nextLine();
 
@@ -63,7 +63,7 @@ public class Login {
         System.out.print("Enter Password: ");
         String password = sc.nextLine();
 
-        String hashed = usertList.HashingPassword(password);
+        String hashed = usertList.hashingPassword(password);
 
         int id = usertList.getUsers().size()+1;
 
@@ -83,7 +83,7 @@ public class Login {
         System.out.println("Employee Registered");
     }
 
-    public void RegistrerAdmin(UserList usertList, Scanner sc)
+    public void registrerAdmin(UserList usertList, Scanner sc)
     {
         System.out.print("Enter Name: ");
         String name = sc.nextLine();
@@ -93,7 +93,7 @@ public class Login {
 
         System.out.print("Enter Password: ");
         String password = sc.nextLine();
-        String hashed = usertList.HashingPassword(password);
+        String hashed = usertList.hashingPassword(password);
 
         int id = usertList.getUsers().size()+1;
 
