@@ -52,7 +52,7 @@ public class TransactionsFileManager {
                 if (parts.length >= 5) {
                     transactions.add(new Transaction(
                             Integer.parseInt(parts[0]),
-                            LocalDateTime.parse(parts[1]),
+                            parts[1],
                             parts[2],
                             Double.parseDouble(parts[3]),
                             parts[4]

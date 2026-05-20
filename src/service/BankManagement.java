@@ -40,9 +40,9 @@ public class BankManagement {
         this.transactionsList=transactionsList;
     }
 
-    public void createCustomer(int id, String name, String address, int riskLevel
-            , LocalDate linkingDate,double balance){
-        Customer customer=new Customer(name,id,address,riskLevel,linkingDate,balance);
+    public void createCustomer(int id, String name, String address,String password,
+                               int riskLevel, LocalDate linkingDate,double balance,String accountNumber){
+        Customer customer=new Customer(name,id,address,password,riskLevel,linkingDate,balance,accountNumber);
         usersList.users.put(id,customer);
         System.out.println("model.Customer registered successfully");
     }
@@ -86,7 +86,7 @@ public class BankManagement {
             System.out.println("Account not found.");
         }
     }
-    public void depositMoney(String accountNumber, double amount) {
+    public void depositMoney(String accountNumber, double amount,String date) {
         BankAccount bankAccount = accountsList.searchByAccountNumber(accountNumber);
 
         if (bankAccount != null) {
@@ -94,7 +94,7 @@ public class BankManagement {
 
             Transaction transaction = new Transaction(
                     generateTransactionId(),
-                    LocalDate.now().atStartOfDay(),
+                    date,
                     "Deposit",
                   amount,
                     accountNumber
@@ -106,12 +106,12 @@ public class BankManagement {
             System.out.println("Account not found.");
         }
     }
-     public void withdrawMoney(String accountNumber,double amount){
+     public void withdrawMoney(String accountNumber,double amount,String date){
         BankAccount bankAccount=accountsList.searchByAccountNumber(accountNumber);
 
         if(bankAccount!=null){
             bankAccount.withdrawMoney(amount);
-            Transaction transaction=new Transaction(generateTransactionId(),LocalDate.now().atStartOfDay(),"Withdraw",amount,accountNumber);
+            Transaction transaction=new Transaction(generateTransactionId(),date,"Withdraw",amount,accountNumber);
             transactionsList.addTransaction(accountNumber,transaction);
         } else {
             System.out.println("Account not found.");

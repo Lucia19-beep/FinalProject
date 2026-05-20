@@ -5,12 +5,12 @@ import java.time.format.DateTimeFormatter;
 
 public class Transaction {
     int id;
-    LocalDateTime date;
+    String date;
     String type;
     double amount;
     String accountDestination;
 
-    public Transaction(int id, LocalDateTime date, String type, double amount, String accountDestination) {
+    public Transaction(int id, String date, String type, double amount, String accountDestination) {
         this.id = id;
         this.date = date;
         this.type = type;
@@ -21,7 +21,7 @@ public class Transaction {
         return id;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -36,10 +36,9 @@ public class Transaction {
     public String getAccountDestination() {
         return accountDestination;
     }
+
     @Override
     public String toString(){
-        DateTimeFormatter dtf=DateTimeFormatter.ofPattern("DD-MM-YYYY");
-        String dateFormatted=date.format(dtf);
-        return dateFormatted + "-" + type + "-" + amount +"€";
+        return date + "-" + type + "-" + amount +"€";
     }
 }

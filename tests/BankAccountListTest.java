@@ -7,10 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BankAccountListTest {
     BankAccountList bankAccountList=new BankAccountList();
-    @Test
-    void getAccounts() {
-        BankAccountList bankAccountList=new BankAccountList();
-    }
+
     @Test
     void checkEquals(){
         CurrentAccount laura=new CurrentAccount("ES111",100000,"Laura");
