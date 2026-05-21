@@ -79,13 +79,16 @@ public class UserFileManager {
                     switch (parts[0]) {
                         case "CUSTOMER":
                             if (parts.length >= 7) {
+                                // CUSTOMER
                                 users.add(new Customer(
                                         parts[1],
                                         Integer.parseInt(parts[2]),
                                         parts[3],
-                                        Integer.parseInt(parts[4]),
-                                        LocalDate.parse(parts[5]),
-                                        Double.parseDouble(parts[6])
+                                        parts[4],
+                                        Integer.parseInt(parts[5]),
+                                        LocalDate.parse(parts[6]),
+                                        Double.parseDouble(parts[7]),
+                                        parts.length >= 9 ? parts[8] : ""
                                 ));
                             }
                             break;
@@ -97,8 +100,9 @@ public class UserFileManager {
                                         Integer.parseInt(parts[2]),
                                         parts[3],
                                         parts[4],
-                                        Double.parseDouble(parts[5]),
-                                        Boolean.parseBoolean(parts[6])
+                                        parts[5],
+                                        Double.parseDouble(parts[6]),
+                                        Boolean.parseBoolean(parts[7])
                                 ));
                             }
                             break;
@@ -109,7 +113,8 @@ public class UserFileManager {
                                         parts[1],
                                         Integer.parseInt(parts[2]),
                                         parts[3],
-                                        Integer.parseInt(parts[4])
+                                        parts[4],
+                                        Integer.parseInt(parts[5])
                                 ));
                             }
                             break;

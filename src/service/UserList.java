@@ -98,8 +98,17 @@ public class UserList {
                 int id=Integer.parseInt(line[1]);
                 switch(type){
                     case "Customer":
-                       user = new Customer(line[2],Integer.parseInt(line[1]),line[3],line[4],Integer.parseInt(line[5]),LocalDate.parse(line[6]),Double.parseDouble(line[7]),line[8]);
-                   break;
+                        user = new Customer(
+                                line[2],
+                                Integer.parseInt(line[1]),
+                                line[3],
+                                line[4],
+                                Integer.parseInt(line[6]),
+                                LocalDate.parse(line[5]),
+                                Double.parseDouble(line[7]),
+                                line[8]
+                        );
+                        break;
                     case "Employee":
                         user = new Employee(line[2],Integer.parseInt(line[1]),line[3],line[4],line[5],Double.parseDouble(line[6]),Boolean.parseBoolean(line[7]));
                     break;

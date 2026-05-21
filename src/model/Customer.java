@@ -19,6 +19,20 @@ public class Customer extends User{
         this.balance = balance;
         this.accountNumber = accountNumber;
     }
+    public Customer(String name,
+                    int id,
+                    String address,
+                    int riskLevel,
+                    LocalDate linkingDate,
+                    double balance) {
+
+        super(name, id, address, "");
+
+        this.riskLevel = riskLevel;
+        this.linkingDate = linkingDate;
+        this.balance = balance;
+        this.accountNumber = "";
+    }
     public String getAccountNumber() {
         return accountNumber;
     }
