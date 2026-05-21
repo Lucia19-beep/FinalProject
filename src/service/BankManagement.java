@@ -46,18 +46,33 @@ public class BankManagement {
         usersList.users.put(id,customer);
         System.out.println("model.Customer registered successfully");
     }
-    public void doTransfer(String ibanOrigin,String ibanDestination,double amount
-            ,String concept){
-        CurrentAccount origin= (CurrentAccount) accountsList.accounts.get
-                (Integer.parseInt(ibanOrigin));
-        CurrentAccount destination= (CurrentAccount) accountsList.accounts.get
-                (Integer.parseInt(ibanDestination));
+    public void doTransfer(String ibanOrigin, String ibanDestination, double amount, String concept) {
+        BankAccount origin = accountsList.searchByAccountNumber(ibanOrigin);
+        BankAccount destination = accountsList.searchByAccountNumber(ibanDestination);
 
-        if(origin!=null && destination!=null){
-            if(origin.getBalance()>=amount){
-                origin.withdrawMoney(amount);
-                destination.depositMoney(amount);
-            }
+        if (origin == null || destination == null) {
+            System.out.println("Account not found.");
+        } else if (origin.isLocked() || destination.isLocked()) {
+            System.out.println("One of the accounts is locked.");
+        } else if (amount <= 0) {
+            System.out.println("Invalid amount.");
+        } else if (origin.getBalance() < amount) {
+            System.out.println("Insufficient funds.");
+        } else {
+            origin.withdrawMoney(amount);
+            destination.depositMoney(amount);
+
+            Transaction transaction = new Transaction(
+                    generateTransactionId(),
+                    LocalDate.now().toString(),
+                    "Transfer - " + concept,
+                    amount,
+                    ibanOrigin
+            );
+
+            transactionsList.addTransaction(ibanOrigin, transaction);
+
+            System.out.println("Transfer successful.");
         }
     }
     public boolean isAccountOwner(String id,String accountNumber){
