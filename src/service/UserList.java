@@ -1,9 +1,6 @@
 package service;
 
-import model.Administrator;
-import model.Customer;
-import model.Employee;
-import model.User;
+import model.*;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -43,7 +40,7 @@ public class UserList {
         return user1;
     }
     public void saveMap(UserList userList){
-        try(PrintWriter out = new PrintWriter(System.out,true)){
+        try(PrintWriter out = new PrintWriter(new FileWriter("users.txt",false))) {
             for(User user: userList.getUsers().values()){
                 if(user instanceof Customer){
                     Customer customer=(Customer)user;
@@ -101,7 +98,16 @@ public class UserList {
                 int id=Integer.parseInt(line[1]);
                 switch(type){
                     case "Customer":
-                        user = new Customer(line[2],Integer.parseInt(line[1]),line[3],line[4],Integer.parseInt(line[5]),LocalDate.parse(line[6]),Double.parseDouble(line[7]),line[8]);
+                        user = new Customer(
+                                line[2],
+                                Integer.parseInt(line[1]),
+                                line[3],
+                                line[4],
+                                Integer.parseInt(line[6]),
+                                LocalDate.parse(line[5]),
+                                Double.parseDouble(line[7]),
+                                line[8]
+                        );
                         break;
                     case "Employee":
                         user = new Employee(line[2],Integer.parseInt(line[1]),line[3],line[4],line[5],Double.parseDouble(line[6]),Boolean.parseBoolean(line[7]));
@@ -133,38 +139,56 @@ public class UserList {
         System.out.println("Enter User Name: ");
         String name=sc.nextLine();
         User user=searchByName(name);
-        users.remove(user.getId());
-        saveMap(userList);
+        if(user != null){
+            users.remove(user.getId());
+            saveMap(userList);
+            System.out.println("User "+name+" has been deleted!");
+        }
+        else {
+            System.out.println("User "+name+" not found!");
+        }
     }
 
     public void editUser(UserList userList){
         System.out.println("Enter User Name: ");
         String name=sc.nextLine();
         User user=searchByName(name);
-        boolean exit = false;
-        while(!exit){
-            if(user instanceof Customer){
-                Customer customer=(Customer)user;
-                System.out.println("Enter New Customer Name: ");
-                customer.setName(sc.nextLine());
-                System.out.println("Enter New Customer Address: ");
-                customer.setAddress(sc.nextLine());
-                System.out.println("Enter New Customer Password: ");
-                customer.setPassword(hashingPassword(sc.nextLine()));
-                System.out.println("Enter New Customer Bank Account: ");
+        if (user!=null){
+            boolean exit = false;
+            while(!exit) {
+                System.out.println("=== EDIT USER ===");
+                System.out.println("1. Edit Name");
+                System.out.println("2. Edit Address");
+                System.out.println("3. Edit Password");
+                System.out.println("4. Exit");
+                String choice = sc.nextLine();
 
+                switch (choice) {
+                    case "1":
+                        System.out.println("Enter New Name: ");
+                        user.setName(sc.nextLine());
+                        break;
+                    case "2":
+                        System.out.println("Enter New Address: ");
+                        user.setAddress(sc.nextLine());
+                        break;
+                    case "3":
+                        System.out.println("Enter New Password: ");
+                        user.setPassword(hashingPassword(sc.nextLine()));
+                        break;
+                    case "4":
+                        exit = true;
+                        break;
+                    default:
+                        System.out.println("Wrong Choice");
+                        break;
+                }
+                saveMap(userList);
+                System.out.println("Sucefully Edited!");
             }
-            else if (user instanceof Employee){
-
-            }
-            else if (user instanceof Administrator){
-
-            }
-            else{
-                System.out.println("Invalid User Name");
-                exit = true;
-            }
-
+        }
+        else{
+            System.out.println("User not found");
         }
     }
 }
