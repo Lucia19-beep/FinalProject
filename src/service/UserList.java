@@ -26,8 +26,26 @@ public class UserList {
     public void addUser(int id,User user){
         users.put(id,user);
     }
-    public void deleteUser(int id,User user){
-        users.remove(id,user);
+    public void editUser(int id,User user){
+        for(int i=0;i<users.size();i++){
+            User actualUser=users.get(i);
+            if(actualUser.getId()==id){
+                users.put(i,user);
+                System.out.println("User changed correctly");
+                return;
+            }
+        }
+        System.out.println("User doesn't exist on the map");
+    }
+    public void deleteUser(int id){
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getId() == id) {
+                users.remove(i);
+                System.out.println("User deleted");
+                return;
+            }
+        }
+        System.out.println("User with ID " + id + "doesn't exists.");
     }
     public User searchByName(String name) {
         User user1 = null;
