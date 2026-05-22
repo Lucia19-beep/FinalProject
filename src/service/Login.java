@@ -18,8 +18,76 @@ public class Login {
         System.out.print("Enter Your Password: ");
         String password = sc.nextLine();
 
+<<<<<<< Updated upstream
         User user = usertList.searchByName(name);
         if (user != null)
+=======
+        String[] data = SignUserData();
+        String name = data[0];
+        String address = data[1];
+        String password = data[2];
+
+        int id = GetNumberID();
+        int riskLevel = 0;
+        LocalDate linkingDate = LocalDate.now();
+        double balance = 0.0;
+        String line = "model.Customer," +name+','+id+','+address+','+riskLevel+','+linkingDate+','+balance+','+password;
+        SignUser(line);
+        cs = new Customer(name, id, address, riskLevel, linkingDate, balance);
+        return cs;
+    }
+    public static String[] SignAdminData()
+    {
+        String[] data = SignUserData();
+        System.out.print("Acces Level: ");
+        int accessLevel = 0;
+        String[] dataAdmin = {data[0],data[1],data[2],Integer.toString(accessLevel)};
+        return dataAdmin;
+    }
+    public static User SignUpAdmin()
+    {
+        Administrator admin = null;
+        String[] data = SignAdminData();
+        String name = data[0];
+        String address = data[1];
+        String password = data[2];
+        int id = GetNumberID();
+        String accessLevelString = data[3];
+        int accessLevel = Integer.parseInt(accessLevelString);
+        String line = "Admin,"+name+','+id+','+address+','+accessLevel+','+password;
+        SignUser(line);
+        admin = new Administrator(name, id, address, accessLevel);
+        return admin;
+    }
+    public static String[] SignEmployeeData()
+    {
+        String[] data = SignUserData();
+        System.out.print("Position: ");
+        String position = sc.nextLine();
+        System.out.print("Salary: ");
+        String salary = sc.nextLine();
+        System.out.print("Permits: Yes/No ");
+        String permission = sc.nextLine();
+        String[] dataEmployee ={data[0],data[1],data[2],position,salary,permission};
+        return dataEmployee;
+    }
+    public static User SignUpEmployee()
+    {
+        Employee employee = null;
+        String[] data = SignEmployeeData();
+        String name = data[0];
+        String address = data[1];
+        String password = data[2];
+        String position = data[3];
+        String salary = data[4];
+        String permission = data[5];
+        int id = GetNumberID();
+
+        Double salaryDouble = Double.parseDouble(salary);
+
+        boolean accessPermit = false;
+        if (permission.equalsIgnoreCase("Yes"))
+>>>>>>> Stashed changes
         {
             String hashedPassword = usertList.hashingPassword(password);
             if(!user.getPassword().equals(hashedPassword)){

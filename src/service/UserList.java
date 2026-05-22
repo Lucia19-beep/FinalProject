@@ -2,9 +2,15 @@ package service;
 
 import model.*;
 
+<<<<<<< Updated upstream
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+=======
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+>>>>>>> Stashed changes
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -29,6 +35,7 @@ public class UserList {
     public void deleteUser(int id,User user){
         users.remove(id,user);
     }
+<<<<<<< Updated upstream
     public User searchByName(String name) {
         User user1 = null;
         for (User user2 : users.values()) {
@@ -189,6 +196,14 @@ public class UserList {
         }
         else{
             System.out.println("User not found");
+=======
+    public void saveMapUser(int id,User user)
+    {
+        try(PrintWriter pw=new PrintWriter(new File("Users.txt"))){
+            pw.print
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+>>>>>>> Stashed changes
         }
     }
 }
