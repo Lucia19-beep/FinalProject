@@ -1,4 +1,4 @@
-package persistence;
+package persistence; //Talking about this class
 
 import model.Administrator;
 import model.Customer;
