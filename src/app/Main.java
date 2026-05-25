@@ -56,10 +56,10 @@ public class Main {
                     registerEmployee(sc,userList);
                     break;
                 case "3":
-                    editUser(sc,userList);
+                    userList.editUser(cs);
                     break;
                 case "4":
-                    deleteUser(sc,userList);
+                    userList.deleteUser(cs);
                     break;
                 case "5":
                     showAllTransactions();
@@ -284,72 +284,6 @@ public class Main {
         } else {
             System.out.println("Account not found.");
         }
-    }
-    private static void deleteUser(Scanner sc,UserList userList){
-        System.out.println("Id: ");
-        int id=sc.nextInt();
-        userList.deleteUser(id);
-    }
-    private static void editUser(Scanner sc,UserList userList){
-        System.out.println("Id: ");
-        int id=sc.nextInt();
-        sc.nextLine();
-        System.out.println("What type of User is now ?");
-        System.out.println("1. Customer");
-        System.out.println("2. Administrator");
-        System.out.println("3. Employee");
-        String userType=sc.nextLine();
-        System.out.println("Introduce the new name: ");
-        String name=sc.nextLine();
-        System.out.println("Address: ");
-        String address=sc.nextLine();
-        System.out.println("Password: ");
-        String password=sc.nextLine();
-
-        User newUser=null;
-        switch(userType){
-            case "1":
-                System.out.println("Risk level: ");
-                int riskLevel=sc.nextInt();
-                sc.nextLine();
-                System.out.println("Balance: ");
-                double balance=sc.nextDouble();
-                sc.nextLine();
-                System.out.println("Account number: ");
-                String accountNumber=sc.nextLine();
-                System.out.println("Bank account: (1 Current, 2 Saving)");
-                String option=sc.nextLine();
-
-                if(option.equals("1")){
-                    CurrentAccount currentAccount=new CurrentAccount(accountNumber,balance,name);
-                }
-                else if(option.equals("2")){
-                    SavingAccount savingAccount=new SavingAccount(accountNumber,balance,name,5.0);
-                }
-                else{
-                    System.out.println("Non valid option");
-                }
-                newUser=new Customer(name,id,address,password,riskLevel,
-                        LocalDate.now(),balance,accountNumber);
-                break;
-            case "2":
-                System.out.println("Access level: ");
-                int accessLevel=sc.nextInt();
-                sc.nextLine();
-                newUser=new Administrator(name,id,address,password,accessLevel);
-                break;
-            case "3":
-                System.out.println("Position: ");
-                String position=sc.nextLine();
-                System.out.println("Salary: ");
-                double salary=sc.nextDouble();
-                sc.nextLine();
-                System.out.println("Access permits: ");
-                boolean accessPermits=sc.nextBoolean();
-                newUser=new Employee(name,id,address,password,position,salary,accessPermits);
-                break;
-        }
-        userList.editUser(id,newUser);
     }
     private static void registerAdmin(Scanner sc, UserList userList) {
         Login login = new Login();

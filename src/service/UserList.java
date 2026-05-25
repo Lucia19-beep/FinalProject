@@ -26,26 +26,69 @@ public class UserList {
     public void addUser(int id,User user){
         users.put(id,user);
     }
-    public void editUser(int id,User user){
-        for(int i=0;i<users.size();i++){
-            User actualUser=users.get(i);
-            if(actualUser.getId()==id){
-                users.put(i,user);
-                System.out.println("User changed correctly");
-                return;
-            }
-        }
-        System.out.println("User doesn't exist on the map");
+    public void deleteUser(User user){
+        System.out.println("Id: ");
+        int id=sc.nextInt();
+        users.remove(id,user);
     }
-    public void deleteUser(int id){
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getId() == id) {
-                users.remove(i);
-                System.out.println("User deleted");
-                return;
-            }
+    public void editUser(User user){
+        System.out.println("Id: ");
+        int id=sc.nextInt();
+        sc.nextLine();
+        System.out.println("What type of User is now ?");
+        System.out.println("1. Customer");
+        System.out.println("2. Administrator");
+        System.out.println("3. Employee");
+        String userType=sc.nextLine();
+        System.out.println("Introduce the new name: ");
+        String name=sc.nextLine();
+        System.out.println("Address: ");
+        String address=sc.nextLine();
+        System.out.println("Password: ");
+        String password=sc.nextLine();
+
+        switch(userType){
+            case "1":
+                System.out.println("Risk level: ");
+                int riskLevel=sc.nextInt();
+                sc.nextLine();
+                System.out.println("Balance: ");
+                double balance=sc.nextDouble();
+                sc.nextLine();
+                System.out.println("Account number: ");
+                String accountNumber=sc.nextLine();
+                System.out.println("Bank account: (1 Current, 2 Saving)");
+                String option=sc.nextLine();
+
+                if(option.equals("1")){
+                    CurrentAccount currentAccount=new CurrentAccount(accountNumber,balance,name);
+                }
+                else if(option.equals("2")){
+                    SavingAccount savingAccount=new SavingAccount(accountNumber,balance,name,5.0);
+                }
+                else{
+                    System.out.println("Non valid option");
+                }
+                user=new Customer(name,id,address,password,riskLevel,
+                        LocalDate.now(),balance,accountNumber);
+                break;
+            case "2":
+                System.out.println("Access level: ");
+                int accessLevel=sc.nextInt();
+                sc.nextLine();
+                user=new Administrator(name,id,address,password,accessLevel);
+                break;
+            case "3":
+                System.out.println("Position: ");
+                String position=sc.nextLine();
+                System.out.println("Salary: ");
+                double salary=sc.nextDouble();
+                sc.nextLine();
+                System.out.println("Access permits: ");
+                boolean accessPermits=sc.nextBoolean();
+                user=new Employee(name,id,address,password,position,salary,accessPermits);
+                break;
         }
-        System.out.println("User with ID " + id + "doesn't exists.");
     }
     public User searchByName(String name) {
         User user1 = null;

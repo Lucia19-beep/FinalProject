@@ -1,1 +1,2 @@
 Customer,1,Sam,f,6789,2026-05-21,0,0.0,AC1,null
+Customer,2,lucia,avenida 1,mtqf,2026-05-25,0,0.0,AC2,null

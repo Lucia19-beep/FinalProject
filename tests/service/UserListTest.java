@@ -25,7 +25,7 @@ class UserListTest {
         User user = new User("Pepe", 1, "Street 5", "1234");
 
         list.addUser(1, user);
-        list.deleteUser(1, user);
+        list.deleteUser(user);
 
         assertEquals(0, list.getUsers().size());
     }
